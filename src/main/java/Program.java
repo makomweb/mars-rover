@@ -3,10 +3,41 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		AClass obj = new AClass();
+		Plateau plateau = new Plateau(5, 5);
 		
-		int sum = obj.sum(23, 34);
-		
-		System.out.println("Sum is: " + sum);
+		{
+			Rover rover = new Rover();
+			rover.dropRover(1, 2, 'N');
+			
+			rover.receiveInstruction(Instruction.LEFT);
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.LEFT);
+			rover.receiveInstruction(Instruction.MOVE);		
+			rover.receiveInstruction(Instruction.LEFT);
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.LEFT);
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.MOVE);
+			
+			System.out.println("Rover 1: " + rover.toString());
+		}
+
+		{
+			Rover rover = new Rover();
+			rover.dropRover(3, 3, 'E');
+			
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.RIGHT);
+			rover.receiveInstruction(Instruction.MOVE);		
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.RIGHT);			
+			rover.receiveInstruction(Instruction.MOVE);
+			rover.receiveInstruction(Instruction.RIGHT);
+			rover.receiveInstruction(Instruction.RIGHT);
+			rover.receiveInstruction(Instruction.MOVE);
+			
+			System.out.println("Rover 2: " + rover.toString());
+		}
 	}
 }
