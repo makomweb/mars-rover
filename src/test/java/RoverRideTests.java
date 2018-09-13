@@ -5,9 +5,10 @@ public class RoverRideTests {
 
 	@Test
 	public void testRoverOne() {
-		
+
+		Plateau p = new Plateau(5, 5);
 		Rover r = new Rover("One");
-		r.dropRover(1, 2, 'N');
+		r.dropRover(p, 1, 2, 'N');
 		r.processInstructions("LMLMLMLMM");
 		
 		String report = r.report();		
@@ -16,9 +17,10 @@ public class RoverRideTests {
 	
 	@Test
 	public void testRoverTwo() {
-		
+
+		Plateau p = new Plateau(5, 5);
 		Rover r = new Rover("Two");
-		r.dropRover(3, 3, 'E');
+		r.dropRover(p, 3, 3, 'E');
 		r.processInstructions("MMRMMRMRRM");
 
 		String report = r.report();

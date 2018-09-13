@@ -1,22 +1,22 @@
 
 public class Rover {
 	
-	private Position position = null;
-	
+	private Plateau plateau = null;
+	private Position position = null;	
 	private Heading heading = null;
-	
 	private String name;
 	
 	public Rover(String name) {
 		this.name = name;
 	}
 	
-	public void dropRover(Position p, Heading h) {
+	public void dropRover(Plateau plateau, Position p, Heading h) {
+		this.plateau = plateau;
 		position = p;
 		heading = h;
 	}
 	
-	public void dropRover(int posX, int posY, char heading) {
+	public void dropRover(Plateau plateau, int posX, int posY, char heading) {
 		
 		Heading h = null;
 		
@@ -27,7 +27,7 @@ public class Rover {
 			case 'E': h = Heading.E; break;
 		}
 		
-		dropRover(new Position(posX, posY), h);
+		dropRover(plateau, new Position(posX, posY), h);
 	}
 	
 	@Override
@@ -94,13 +94,27 @@ public class Rover {
 		
 		if (position == null || heading == null) {
 			throw new NotDroppedException();
-		}		
+		}
+		
+		Position newPosition = null;
 		
 		switch (heading) {
-			case E: position = new Position(position.x + 1, position.y); break;
-			case N: position = new Position(position.x, position.y + 1); break;
-			case S: position = new Position(position.x, position.y - 1); break;
-			case W: position = new Position(position.x - 1, position.y); break;
+			case E: newPosition = new Position(position.x + 1, position.y); break;
+			case N: newPosition = new Position(position.x, position.y + 1); break;
+			case S: newPosition = new Position(position.x, position.y - 1); break;
+			case W: newPosition = new Position(position.x - 1, position.y); break;
 		}
+		
+		assertNewPositionIsOnPlateau(newPosition);
+		
+		position = newPosition;
+	}
+
+	private void assertNewPositionIsOnPlateau(Position newPosition) {
+
+		if (newPosition.x < 0) throw new RuntimeException("Rover would fall from the plateau!");
+		if (newPosition.y < 0) throw new RuntimeException("Rover would fall from the plateau!");
+		if (newPosition.x > plateau.dimX) throw new RuntimeException("Rover would fall from the plateau!");
+		if (newPosition.y > plateau.dimY) throw new RuntimeException("Rover would fall from the plateau!");
 	}
 }

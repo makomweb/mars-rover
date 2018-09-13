@@ -1,8 +1,8 @@
 
 public class Plateau {
 	
-	private int dimX;
-	private int dimY;
+	public int dimX;
+	public int dimY;
 	
 	public Plateau(int dimX, int dimY) {
 		
