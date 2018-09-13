@@ -1,9 +1,9 @@
 
 public class Rover {
 	
-	private Plateau plateau = null;
-	private Position position = null;	
-	private Heading heading = null;
+	private Plateau plateau;
+	private Position position;	
+	private Heading heading;
 	private String name;
 	
 	public Rover(String name) {
