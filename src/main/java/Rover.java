@@ -5,6 +5,12 @@ public class Rover {
 	
 	private Heading heading = null;
 	
+	private String name;
+	
+	public Rover(String name) {
+		this.name = name;
+	}
+	
 	public void dropRover(Position p, Heading h) {
 		position = p;
 		heading = h;
@@ -26,12 +32,16 @@ public class Rover {
 	
 	@Override
 	public String toString() {
+		return name + ": " + report();
+	}
+	
+	public String report() {
 		
 		if (position == null || heading == null) {
 			throw new NotDroppedException();
 		}
-			
-		return position.toString() + " " + heading; 
+		
+		return position.toString() + " " + heading;
 	}
 	
 	public void receiveInstruction(Instruction instruction) {

@@ -6,7 +6,7 @@ public class Program {
 		Plateau plateau = new Plateau(5, 5);
 		
 		{
-			Rover rover = new Rover();
+			Rover rover = new Rover("One");
 			rover.dropRover(1, 2, 'N');
 			
 			rover.receiveInstruction(Instruction.LEFT);
@@ -19,11 +19,11 @@ public class Program {
 			rover.receiveInstruction(Instruction.MOVE);
 			rover.receiveInstruction(Instruction.MOVE);
 			
-			System.out.println("Rover 1: " + rover.toString());
+			System.out.println("Rover report - " + rover.toString());
 		}
 
 		{
-			Rover rover = new Rover();
+			Rover rover = new Rover("Two");
 			rover.dropRover(3, 3, 'E');
 			
 			rover.receiveInstruction(Instruction.MOVE);
@@ -37,7 +37,7 @@ public class Program {
 			rover.receiveInstruction(Instruction.RIGHT);
 			rover.receiveInstruction(Instruction.MOVE);
 			
-			System.out.println("Rover 2: " + rover.toString());
+			System.out.println("Rover report - " + rover.toString());
 		}
 	}
 }
