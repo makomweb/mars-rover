@@ -43,7 +43,7 @@ public class Rover {
 	public String report() {
 		
 		if (position == null || heading == null) {
-			throw new NotDroppedException();
+			return "Not dropped yet.";
 		}
 		
 		return position.toString() + " " + heading;
@@ -56,13 +56,16 @@ public class Rover {
 				case 'L': processInstruction(Instruction.LEFT); break;
 				case 'M': processInstruction(Instruction.MOVE); break;
 				case 'R': processInstruction(Instruction.RIGHT); break;
-				default: /* An unknown instruction is ignored. */
-					break;
+				default: /* An unknown instruction is ignored. */ break;
 			}
 		}
 	}
 	
 	private void processInstruction(Instruction instruction) {
+
+		if (position == null || heading == null) {
+			throw new NotDroppedException();
+		}
 		
 		switch (instruction) {
 			case LEFT: turnLeft(); break;
@@ -78,8 +81,6 @@ public class Rover {
 			case N: heading = Heading.W; break;
 			case S: heading = Heading.E; break;
 			case W: heading = Heading.S; break;
-			default:
-				throw new RuntimeException("'heading' was not initialized properly!");
 		}
 	}
 	
@@ -90,16 +91,10 @@ public class Rover {
 			case N: heading = Heading.E; break;
 			case S: heading = Heading.W; break;
 			case W: heading = Heading.N; break;
-			default:
-				throw new RuntimeException("'heading' was not initialized properly!");
 		}
 	}
 	
 	private void move() {
-		
-		if (position == null || heading == null) {
-			throw new NotDroppedException();
-		}
 		
 		Position newPosition = null;
 		
