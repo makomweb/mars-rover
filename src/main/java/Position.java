@@ -13,4 +13,17 @@ public class Position {
 	public String toString() {
 		return x + " " + y;
 	}
+	
+	public boolean IsOnPlateau(Plateau p) {
+
+		if (x < 0 || x > p.dimX) {
+			return false;
+		}
+		
+		if (y < 0 || y > p.dimY) {
+			return false;
+		}
+		
+		return true;
+	}
 }

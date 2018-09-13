@@ -26,4 +26,20 @@ public class RoverRideTests {
 		String report = r.report();
 		assertEquals("5 1 E", report);
 	}
+	
+	@Test
+	public void testRoverMoveFromPlateau() {
+		
+		Plateau p = new Plateau(3,  3);
+		Rover r = new Rover("Three");
+		r.dropRover(p, 2, 2, 'N');
+		
+		try {
+			r.processInstructions("MMMM");
+			assertTrue("The rover should have fallen from the plateau already!", false);			
+		}
+		catch (PositionNotOnPlateauException ex) {
+			assertEquals("Position is not on the plateau!", ex.getMessage());
+		}
+	}
 }

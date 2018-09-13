@@ -11,6 +11,11 @@ public class Rover {
 	}
 	
 	public void dropRover(Plateau plateau, Position p, Heading h) {
+
+		if (!p.IsOnPlateau(plateau)) {
+			throw new PositionNotOnPlateauException();
+		}
+		
 		this.plateau = plateau;
 		position = p;
 		heading = h;
@@ -104,17 +109,11 @@ public class Rover {
 			case S: newPosition = new Position(position.x, position.y - 1); break;
 			case W: newPosition = new Position(position.x - 1, position.y); break;
 		}
-		
-		assertNewPositionIsOnPlateau(newPosition);
+
+		if (!newPosition.IsOnPlateau(plateau)) {
+			throw new PositionNotOnPlateauException();
+		}
 		
 		position = newPosition;
-	}
-
-	private void assertNewPositionIsOnPlateau(Position newPosition) {
-
-		if (newPosition.x < 0) throw new RuntimeException("Rover would fall from the plateau!");
-		if (newPosition.y < 0) throw new RuntimeException("Rover would fall from the plateau!");
-		if (newPosition.x > plateau.dimX) throw new RuntimeException("Rover would fall from the plateau!");
-		if (newPosition.y > plateau.dimY) throw new RuntimeException("Rover would fall from the plateau!");
 	}
 }

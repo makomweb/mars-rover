@@ -8,5 +8,5 @@ public class Plateau {
 		
 		this.dimX = dimX;
 		this.dimY = dimY;
-	}
+	}	
 }
