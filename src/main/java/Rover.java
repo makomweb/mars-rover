@@ -10,6 +10,28 @@ public class Rover {
 		this.name = name;
 	}
 	
+	public void dropRover(Plateau plateau, String args) {
+		
+		String[] parts = args.split(" ");
+		
+		int x = Character.getNumericValue(parts[0].toCharArray()[0]);
+		int y = Character.getNumericValue(parts[1].toCharArray()[0]);
+		Heading h = ToHeading(parts[2].toCharArray()[0]);
+		
+		dropRover(plateau, new Position(x, y), h);
+	}
+	
+	private Heading ToHeading(char heading) {
+		
+		switch (heading) {
+			case 'N': return Heading.N;
+			case 'W': return Heading.W;
+			case 'S': return Heading.S;
+			case 'E': return Heading.E;
+			default: throw new RuntimeException("Unsupported character '" + heading + "'!");
+		}
+	}
+
 	public void dropRover(Plateau plateau, Position p, Heading h) {
 
 		if (!p.IsOnPlateau(plateau)) {
