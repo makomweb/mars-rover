@@ -44,7 +44,20 @@ public class Rover {
 		return position.toString() + " " + heading;
 	}
 	
-	public void receiveInstruction(Instruction instruction) {
+	public void processInstructions(String instructions) {
+		
+		for (char c: instructions.toCharArray()) {
+			switch (c) {
+				case 'L': processInstruction(Instruction.LEFT); break;
+				case 'M': processInstruction(Instruction.MOVE); break;
+				case 'R': processInstruction(Instruction.RIGHT); break;
+				default: /* An unknown instruction is ignored. */
+					break;
+			}
+		}
+	}
+	
+	private void processInstruction(Instruction instruction) {
 		
 		switch (instruction) {
 			case LEFT: turnLeft(); break;

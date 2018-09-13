@@ -8,19 +8,9 @@ public class RoverRideTests {
 		
 		Rover r = new Rover("One");
 		r.dropRover(1, 2, 'N');
+		r.processInstructions("LMLMLMLMM");
 		
-		r.receiveInstruction(Instruction.LEFT);
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.LEFT);
-		r.receiveInstruction(Instruction.MOVE);		
-		r.receiveInstruction(Instruction.LEFT);
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.LEFT);
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.MOVE);
-		
-		String report = r.report();
-		
+		String report = r.report();		
 		assertEquals("1 3 N", report);
 	}
 	
@@ -29,20 +19,9 @@ public class RoverRideTests {
 		
 		Rover r = new Rover("Two");
 		r.dropRover(3, 3, 'E');
-		
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.RIGHT);
-		r.receiveInstruction(Instruction.MOVE);		
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.RIGHT);			
-		r.receiveInstruction(Instruction.MOVE);
-		r.receiveInstruction(Instruction.RIGHT);
-		r.receiveInstruction(Instruction.RIGHT);
-		r.receiveInstruction(Instruction.MOVE);
+		r.processInstructions("MMRMMRMRRM");
 
 		String report = r.report();
-		
 		assertEquals("5 1 E", report);
 	}
 }
