@@ -13,7 +13,7 @@ public class Rover {
 	public void dropRover(Plateau plateau, Position p, Heading h) {
 
 		if (!p.IsOnPlateau(plateau)) {
-			throw new PositionNotOnPlateauException();
+			throw new PositionNotOnPlateauException(plateau, p);
 		}
 		
 		this.plateau = plateau;
@@ -106,7 +106,7 @@ public class Rover {
 		}
 
 		if (!newPosition.IsOnPlateau(plateau)) {
-			throw new PositionNotOnPlateauException();
+			throw new PositionNotOnPlateauException(plateau, newPosition);
 		}
 		
 		position = newPosition;
