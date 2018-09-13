@@ -52,4 +52,23 @@ public class RoverRideTests {
 			assertEquals("Position is not on the plateau!", ex.getMessage());
 		}
 	}
+	
+	@Test
+	public void not_dropped_rover_should_report_properly() {
+		
+		String report = rover.report();
+		assertEquals("Not dropped yet.", report);
+	}
+	
+	@Test
+	public void moving_an_undropped_rover_should_throw() {
+		
+		try {
+			rover.processInstructions("MMMMMM");
+			assertTrue("Moving an undropped rover should have thrown before!", false);
+		}
+		catch (NotDroppedException ex) {
+			assertEquals("Rover was not dropped on the plateau!", ex.getMessage());
+		}
+	}
 }
