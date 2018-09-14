@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>java-test-project</name>
-	<comment>Project java-test-project created by Buildship.</comment>
+	<name>mars-rover</name>
+	<comment>Project mars-rover created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
