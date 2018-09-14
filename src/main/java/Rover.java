@@ -20,17 +20,6 @@ public class Rover {
 		
 		dropRover(plateau, new Position(x, y), h);
 	}
-	
-	private Heading ToHeading(char heading) {
-		
-		switch (heading) {
-			case 'N': return Heading.N;
-			case 'W': return Heading.W;
-			case 'S': return Heading.S;
-			case 'E': return Heading.E;
-			default: throw new RuntimeException("Unsupported character '" + heading + "'!");
-		}
-	}
 
 	public void dropRover(Plateau plateau, Position p, Heading h) {
 
@@ -125,5 +114,16 @@ public class Rover {
 		}
 		
 		position = newPosition;
+	}
+	
+	private static Heading ToHeading(char heading) {
+		
+		switch (heading) {
+			case 'N': return Heading.N;
+			case 'W': return Heading.W;
+			case 'S': return Heading.S;
+			case 'E': return Heading.E;
+			default: throw new RuntimeException("Unsupported character '" + heading + "'!");
+		}
 	}
 }
