@@ -91,7 +91,7 @@ public class Rover {
 		
 		switch (instruction) {
 			case LEFT: turnLeft(); break;
-			case MOVE: move(); break;
+			case MOVE: moveForward(); break;
 			case RIGHT: turnRight(); break;
 		}
 	}
@@ -116,7 +116,7 @@ public class Rover {
 		}
 	}
 	
-	private void move() {
+	private void moveForward() {
 		
 		Position newPosition = null;
 		
