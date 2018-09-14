@@ -71,4 +71,16 @@ public class RoverRideTests {
 			assertEquals("Rover was not dropped on the plateau!", ex.getMessage());
 		}
 	}
+	
+	@Test
+	public void unknown_instruction_should_throw() {
+				
+		try {
+			rover.processInstructions("XXXX");
+			assertTrue("Should have thrown before", false);
+		}
+		catch (UnknownInstructionException ex) {
+			
+		}
+	}
 }

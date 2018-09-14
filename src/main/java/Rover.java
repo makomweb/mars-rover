@@ -78,7 +78,7 @@ public class Rover {
 				case 'L': processInstruction(Instruction.LEFT); break;
 				case 'M': processInstruction(Instruction.MOVE); break;
 				case 'R': processInstruction(Instruction.RIGHT); break;
-				default: /* An unknown instruction is ignored. */ break;
+				default: throw new UnknownInstructionException(c);
 			}
 		}
 	}
