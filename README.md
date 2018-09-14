@@ -56,3 +56,17 @@ or (on windows machines):
 ```
 gradlew.bat test
 ```
+
+## Use the commandline app
+
+Package the app using:
+
+```
+gradlew.bat build
+```
+
+And then execute the app from the subfolder `build\libs`:
+
+ ```
+java -jar mars-rover.jar
+ ```
