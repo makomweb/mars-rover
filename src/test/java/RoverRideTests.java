@@ -13,7 +13,7 @@ public class RoverRideTests {
 		rover.dropRover(plateau, 1, 2, 'N');
 		rover.processInstructions("LMLMLMLMM");
 		
-		String report = rover.report();		
+		String report = rover.reportPosition();		
 		assertEquals("1 3 N", report);
 	}
 	
@@ -23,7 +23,7 @@ public class RoverRideTests {
 		rover.dropRover(plateau, 3, 3, 'E');
 		rover.processInstructions("MMRMMRMRRM");
 
-		String report = rover.report();
+		String report = rover.reportPosition();
 		assertEquals("5 1 E", report);
 	}
 	
@@ -56,7 +56,7 @@ public class RoverRideTests {
 	@Test
 	public void not_dropped_rover_should_report_properly() {
 		
-		String report = rover.report();
+		String report = rover.reportPosition();
 		assertEquals("Not dropped yet.", report);
 	}
 	

@@ -45,19 +45,14 @@ public class Rover {
 		
 		dropRover(plateau, new Position(posX, posY), h);
 	}
-	
-	@Override
-	public String toString() {
-		return name + ": " + report();
-	}
-	
-	public String report() {
+
+	public String reportPosition() {
 		
 		if (position == null || heading == null) {
 			return "Not dropped yet.";
 		}
 		
-		return position.toString() + " " + heading;
+		return name + ": " + position.toString() + " " + heading;
 	}
 	
 	public void processInstructions(String instructions) {
