@@ -46,13 +46,23 @@ public class Rover {
 		dropRover(plateau, new Position(posX, posY), h);
 	}
 
+	public String reportStatus() {
+		
+		StringBuilder sb = new StringBuilder(name);
+		
+		sb.append(" ");
+		sb.append(reportPosition());
+			
+		return sb.toString();
+	}
+
 	public String reportPosition() {
 		
 		if (position == null || heading == null) {
 			return "Not dropped yet.";
 		}
 		
-		return name + ": " + position.toString() + " " + heading;
+		return position.toString() + " " + heading;
 	}
 	
 	public void processInstructions(String instructions) {

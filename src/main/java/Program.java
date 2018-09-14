@@ -22,13 +22,13 @@ public class Program {
 			String dropInfo = scanner.nextLine();
 						
 			Rover r = dropRover(name, p, dropInfo);
-			System.out.println("Report: " + r.reportPosition());
+			System.out.println("Report: " + r.reportStatus());
 
 			System.out.print("Enter instructions for " + name + " (in the form LMRMMMLMM):");
 			String instructions = scanner.nextLine();
 
 			r.processInstructions(instructions);
-			System.out.println("Report: " + r.reportPosition());
+			System.out.println("Report: " + r.reportStatus());
 		}
 	}
 	
