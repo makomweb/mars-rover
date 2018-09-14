@@ -9,6 +9,11 @@ public class Position {
 		this.y = y;
 	}
 	
+	public Position(Position other) {
+		this.x = other.x;
+		this.y = other.y;
+	}
+	
 	@Override
 	public String toString() {
 		return x + " " + y;
@@ -25,5 +30,19 @@ public class Position {
 		}
 		
 		return true;
+	}
+	
+	public Position moveForward(Heading heading) {
+		
+		Position newPosition = null;
+		
+		switch (heading) {
+			case E: newPosition = new Position(x + 1, y); break;
+			case N: newPosition = new Position(x, y + 1); break;
+			case S: newPosition = new Position(x, y - 1); break;
+			case W: newPosition = new Position(x - 1, y); break;
+		}
+
+		return newPosition;
 	}
 }

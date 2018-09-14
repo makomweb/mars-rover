@@ -118,15 +118,8 @@ public class Rover {
 	
 	private void moveForward() {
 		
-		Position newPosition = null;
+		Position newPosition = position.moveForward(heading);
 		
-		switch (heading) {
-			case E: newPosition = new Position(position.x + 1, position.y); break;
-			case N: newPosition = new Position(position.x, position.y + 1); break;
-			case S: newPosition = new Position(position.x, position.y - 1); break;
-			case W: newPosition = new Position(position.x - 1, position.y); break;
-		}
-
 		if (!newPosition.IsOnPlateau(plateau)) {
 			throw new PositionNotOnPlateauException(plateau, newPosition);
 		}
