@@ -34,15 +34,8 @@ public class Rover {
 	
 	public void dropRover(Plateau plateau, int posX, int posY, char heading) {
 		
-		Heading h = null;
-		
-		switch (heading) {
-			case 'N': h = Heading.N; break;
-			case 'W': h = Heading.W; break;
-			case 'S': h = Heading.S; break;
-			case 'E': h = Heading.E; break;
-		}
-		
+		Heading h = ToHeading(heading);
+				
 		dropRover(plateau, new Position(posX, posY), h);
 	}
 
@@ -62,7 +55,7 @@ public class Rover {
 			return "Not dropped yet.";
 		}
 		
-		return position.toString() + " " + heading;
+		return position.toString() + " " + FromHeading(heading);
 	}
 	
 	public void processInstructions(String instructions) {
@@ -93,20 +86,20 @@ public class Rover {
 	private void turnLeft() {
 		
 		switch (heading) {
-			case E: heading = Heading.N; break;
-			case N: heading = Heading.W; break;
-			case S: heading = Heading.E; break;
-			case W: heading = Heading.S; break;
+			case EAST: heading = Heading.NORTH; break;
+			case NORTH: heading = Heading.WEST; break;
+			case SOUTH: heading = Heading.EAST; break;
+			case WEST: heading = Heading.SOUTH; break;
 		}
 	}
 	
 	private void turnRight() {
 		
 		switch (heading) {
-			case E: heading = Heading.S; break;
-			case N: heading = Heading.E; break;
-			case S: heading = Heading.W; break;
-			case W: heading = Heading.N; break;
+			case EAST: heading = Heading.SOUTH; break;
+			case NORTH: heading = Heading.EAST; break;
+			case SOUTH: heading = Heading.WEST; break;
+			case WEST: heading = Heading.NORTH; break;
 		}
 	}
 	
@@ -124,11 +117,22 @@ public class Rover {
 	private static Heading ToHeading(char heading) {
 		
 		switch (heading) {
-			case 'N': return Heading.N;
-			case 'W': return Heading.W;
-			case 'S': return Heading.S;
-			case 'E': return Heading.E;
+			case 'N': return Heading.NORTH;
+			case 'W': return Heading.WEST;
+			case 'S': return Heading.SOUTH;
+			case 'E': return Heading.EAST;
 			default: throw new RuntimeException("Unsupported character '" + heading + "'!");
+		}
+	}
+	
+	private static char FromHeading(Heading heading) {
+		
+		switch (heading) {
+			case NORTH: return 'N';
+			case WEST: return 'W';
+			case SOUTH: return 'S';
+			case EAST: return 'E';
+			default: return ' ';
 		}
 	}
 }

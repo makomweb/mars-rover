@@ -37,10 +37,10 @@ public class Position {
 		Position newPosition = null;
 		
 		switch (heading) {
-			case E: newPosition = new Position(x + 1, y); break;
-			case N: newPosition = new Position(x, y + 1); break;
-			case S: newPosition = new Position(x, y - 1); break;
-			case W: newPosition = new Position(x - 1, y); break;
+			case EAST: newPosition = new Position(x + 1, y); break;
+			case NORTH: newPosition = new Position(x, y + 1); break;
+			case SOUTH: newPosition = new Position(x, y - 1); break;
+			case WEST: newPosition = new Position(x - 1, y); break;
 		}
 
 		return newPosition;
