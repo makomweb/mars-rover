@@ -27,9 +27,15 @@ public class Rover {
 			throw new PositionNotOnPlateauException(plateau, p);
 		}
 		
+		if (plateau.isOccupied(p)) {
+			throw new RuntimeException("Already occupied by a rover!");
+		}
+		
 		this.plateau = plateau;
 		position = p;
 		heading = h;
+		
+		plateau.addRover(this);
 	}
 	
 	public void dropRover(Plateau plateau, int posX, int posY, char heading) {
@@ -68,6 +74,11 @@ public class Rover {
 				default: throw new UnknownInstructionException(c);
 			}
 		}
+	}
+	
+	public boolean hasPosition(Position pos) {
+		
+		return position.isEqual(pos);
 	}
 	
 	private void processInstruction(Instruction instruction) {

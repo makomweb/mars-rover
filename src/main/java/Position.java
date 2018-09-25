@@ -14,6 +14,11 @@ public class Position {
 		this.y = other.y;
 	}
 	
+	public boolean isEqual(Position other) {
+		
+		return x == other.x && y == other.y;
+	}
+	
 	@Override
 	public String toString() {
 		return x + " " + y;

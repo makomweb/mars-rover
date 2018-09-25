@@ -82,7 +82,7 @@ public class RoverRideTests {
 		Rover rover = new Rover("Opportunity");
 		try {
 			rover.processInstructions("XXXX");
-			assertTrue("Should have thrown before", false);
+			assertTrue("Should have thrown before!", false);
 		}
 		catch (UnknownInstructionException ex) {
 			
@@ -91,7 +91,18 @@ public class RoverRideTests {
 	
 	@Test
 	public void moving_rover_over_another_rover_should_throw() {
+
+		Rover one = new Rover("Curiosity");
+		Rover two = new Rover("Opportunity");
 		
-		throw new RuntimeException("Not yet implemented!");
+		one.dropRover(plateau, "3 5 E");
+		
+		try {
+			two.dropRover(plateau, "3 5 N");
+			assertTrue("Should have thrown before!", false);
+		}
+		catch (RuntimeException ex) {
+			
+		}
 	}
 }
