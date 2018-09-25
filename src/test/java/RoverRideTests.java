@@ -88,4 +88,10 @@ public class RoverRideTests {
 			
 		}
 	}
+	
+	@Test
+	public void moving_rover_over_another_rover_should_throw() {
+		
+		throw new RuntimeException("Not yet implemented!");
+	}
 }
