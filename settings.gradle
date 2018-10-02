@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'java-test-project'
+rootProject.name = 'mars-rover'
