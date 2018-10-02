@@ -1,43 +1,48 @@
+import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
-
-		Plateau plateau = new Plateau(5, 5);
+		Scanner scanner = new Scanner(System.in);
 		
-		{
-			Rover rover = new Rover();
-			rover.dropRover(1, 2, 'N');
-			
-			rover.receiveInstruction(Instruction.LEFT);
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.LEFT);
-			rover.receiveInstruction(Instruction.MOVE);		
-			rover.receiveInstruction(Instruction.LEFT);
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.LEFT);
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.MOVE);
-			
-			System.out.println("Rover 1: " + rover.toString());
-		}
+		System.out.print("Enter dimensions of the plateau (in the form x y):");
+		String dimensions = scanner.nextLine();
+		
+		Plateau p = createPlateauFromDimensions(dimensions);
+		
+		int i = 0;
+		while (true) {
 
-		{
-			Rover rover = new Rover();
-			rover.dropRover(3, 3, 'E');
+			i++;
 			
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.RIGHT);
-			rover.receiveInstruction(Instruction.MOVE);		
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.RIGHT);			
-			rover.receiveInstruction(Instruction.MOVE);
-			rover.receiveInstruction(Instruction.RIGHT);
-			rover.receiveInstruction(Instruction.RIGHT);
-			rover.receiveInstruction(Instruction.MOVE);
+			String name = "Rover " + i;
 			
-			System.out.println("Rover 2: " + rover.toString());
+			System.out.print("Enter drop information for " + name + " (in the form x y h):");
+			String dropInfo = scanner.nextLine();
+						
+			Rover r = dropRover(name, p, dropInfo);
+			System.out.println("Report: " + r.reportStatus());
+
+			System.out.print("Enter instructions for " + name + " (in the form LMRMMMLMM):");
+			String instructions = scanner.nextLine();
+
+			r.processInstructions(instructions);
+			System.out.println("Report: " + r.reportStatus());
 		}
+	}
+	
+	private static Rover dropRover(String roverId, Plateau p, String dropInfo) {		
+		Rover r = new Rover(roverId);
+		r.dropRover(p,  dropInfo);
+		
+		return r;
+	}
+
+	private static Plateau createPlateauFromDimensions(String dimensions) {
+		String[] parts = dimensions.split(" ");
+		int dimX = Integer.parseInt(parts[0]);
+		int dimY = Integer.parseInt(parts[1]);
+		
+		return new Plateau(dimX, dimY);
 	}
 }

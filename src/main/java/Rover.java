@@ -1,83 +1,136 @@
 
 public class Rover {
 	
-	private Position position = null;
+	private Plateau plateau;
+	private Position position;	
+	private Heading heading;
+	private String name;
 	
-	private Heading heading = null;
-	
-	public void dropRover(Position p, Heading h) {
-		position = p;
-		heading = h;
+	public Rover(String name) {
+		this.name = name;
 	}
 	
-	public void dropRover(int posX, int posY, char heading) {
+	public void dropRover(Plateau plateau, String args) {		
+		String[] parts = args.split(" ");
 		
-		Heading h = null;
+		int x = Character.getNumericValue(parts[0].toCharArray()[0]);
+		int y = Character.getNumericValue(parts[1].toCharArray()[0]);
+		Heading h = ToHeading(parts[2].toCharArray()[0]);
 		
-		switch (heading) {
-			case 'N': h = Heading.N; break;
-			case 'W': h = Heading.W; break;
-			case 'S': h = Heading.S; break;
-			case 'E': h = Heading.E; break;
+		dropRover(plateau, new Position(x, y), h);
+	}
+
+	public void dropRover(Plateau plateau, Position p, Heading h) {
+		if (!p.IsOnPlateau(plateau)) {
+			throw new PositionNotOnPlateauException(plateau, p);
 		}
 		
-		dropRover(new Position(posX, posY), h);
+		if (plateau.isOccupied(p)) {
+			throw new RuntimeException("Already occupied by a rover!");
+		}
+		
+		this.plateau = plateau;
+		position = p;
+		heading = h;
+		
+		plateau.addRover(this);
 	}
 	
-	@Override
-	public String toString() {
+	public void dropRover(Plateau plateau, int posX, int posY, char heading) {		
+		Heading h = ToHeading(heading);
+				
+		dropRover(plateau, new Position(posX, posY), h);
+	}
+
+	public String reportStatus() {		
+		StringBuilder sb = new StringBuilder(name);
 		
+		sb.append(" ");
+		sb.append(reportPosition());
+			
+		return sb.toString();
+	}
+
+	public String reportPosition() {		
+		if (position == null || heading == null) {
+			return "Not dropped yet.";
+		}
+		
+		return position.toString() + " " + FromHeading(heading);
+	}
+	
+	public void processInstructions(String instructions) {		
+		for (char c: instructions.toCharArray()) {
+			switch (c) {
+				case 'L': processInstruction(Instruction.LEFT); break;
+				case 'M': processInstruction(Instruction.MOVE); break;
+				case 'R': processInstruction(Instruction.RIGHT); break;
+				default: throw new UnknownInstructionException(c);
+			}
+		}
+	}
+	
+	public boolean hasPosition(Position pos) {		
+		return position.isEqual(pos);
+	}
+	
+	private void processInstruction(Instruction instruction) {
 		if (position == null || heading == null) {
 			throw new NotDroppedException();
 		}
-			
-		return position.toString() + " " + heading; 
-	}
-	
-	public void receiveInstruction(Instruction instruction) {
 		
 		switch (instruction) {
 			case LEFT: turnLeft(); break;
-			case MOVE: move(); break;
+			case MOVE: moveForward(); break;
 			case RIGHT: turnRight(); break;
 		}
 	}
 	
-	private void turnLeft() {
-		
+	private void turnLeft() {		
 		switch (heading) {
-			case E: heading = Heading.N; break;
-			case N: heading = Heading.W; break;
-			case S: heading = Heading.E; break;
-			case W: heading = Heading.S; break;
-			default:
-				throw new RuntimeException("'heading' was not initialized properly!");
+			case EAST: heading = Heading.NORTH; break;
+			case NORTH: heading = Heading.WEST; break;
+			case SOUTH: heading = Heading.EAST; break;
+			case WEST: heading = Heading.SOUTH; break;
 		}
 	}
 	
-	private void turnRight() {
-		
+	private void turnRight() {		
 		switch (heading) {
-			case E: heading = Heading.S; break;
-			case N: heading = Heading.E; break;
-			case S: heading = Heading.W; break;
-			case W: heading = Heading.N; break;
-			default:
-				throw new RuntimeException("'heading' was not initialized properly!");
+			case EAST: heading = Heading.SOUTH; break;
+			case NORTH: heading = Heading.EAST; break;
+			case SOUTH: heading = Heading.WEST; break;
+			case WEST: heading = Heading.NORTH; break;
 		}
 	}
 	
-	private void move() {
+	private void moveForward() {		
+		Position newPosition = position.moveForward(heading);
 		
-		if (position == null || heading == null) {
-			throw new NotDroppedException();
-		}		
+		if (!newPosition.IsOnPlateau(plateau)) {
+			throw new PositionNotOnPlateauException(plateau, newPosition);
+		}
 		
+		position = newPosition;
+	}
+	
+	private static Heading ToHeading(char heading) {		
 		switch (heading) {
-			case E: position = new Position(position.x + 1, position.y); break;
-			case N: position = new Position(position.x, position.y + 1); break;
-			case S: position = new Position(position.x, position.y - 1); break;
-			case W: position = new Position(position.x - 1, position.y); break;
+			case 'N': return Heading.NORTH;
+			case 'W': return Heading.WEST;
+			case 'S': return Heading.SOUTH;
+			case 'E': return Heading.EAST;
+			default: throw new RuntimeException("Unsupported character '" + heading + "'!");
+		}
+	}
+	
+	private static char FromHeading(Heading heading) {		
+		switch (heading) {
+			case NORTH: return 'N';
+			case WEST: return 'W';
+			case SOUTH: return 'S';
+			case EAST: return 'E';
+			default: return ' ';
 		}
 	}
 }
