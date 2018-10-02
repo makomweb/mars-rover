@@ -10,3 +10,9 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.12'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Program'
+    }
+}
