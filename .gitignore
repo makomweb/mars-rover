@@ -159,3 +159,6 @@ gradle-app.setting
 
 
 # End of https://www.gitignore.io/api/java,linux,macos,gradle,windows,intellij,intellij+all
+/.classpath
+/.project
+/.settings
