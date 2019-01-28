@@ -2,6 +2,8 @@
 
 [![Build Status](https://mkomischke.visualstudio.com/mars-rover-ci/_apis/build/status/makomweb.mars-rover)](https://mkomischke.visualstudio.com/mars-rover-ci/_build/latest?definitionId=6)
 
+[http://kata-log.rocks/mars-rover-kata](http://kata-log.rocks/mars-rover-kata)
+
 ## The Problem
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars.
 This plateau, which is curiously rectangular, must be navigated by the rovers
