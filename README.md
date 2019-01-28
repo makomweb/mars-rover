@@ -1,4 +1,4 @@
-# Mars Rover Code Challenge
+# Mars Rover Code Kata
 
 [![Build Status](https://mkomischke.visualstudio.com/mars-rover-ci/_apis/build/status/makomweb.mars-rover)](https://mkomischke.visualstudio.com/mars-rover-ci/_build/latest?definitionId=6)
 
