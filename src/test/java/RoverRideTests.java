@@ -99,6 +99,21 @@ public class RoverRideTests {
 	}
 	
 	@Test
+	public void dropping_at_10_10_should_give_exact_report() {
+
+		Plateau plat = new Plateau(20, 20);
+		
+		Rover one = new Rover("Curiosity");
+		
+		one.dropRover(plat, "10 10 N");
+		
+		String report = one.reportPosition();
+		
+		//assertTrue("Report is not like expected", "10 10 N".equals(report));
+		assertEquals("10 10 N", report);
+	}
+	
+	@Test
 	public void dropping_two_rovers_next_to_eachother_should_succeed() {
 		Rover one = new Rover("Curiosity");
 		Rover two = new Rover("Opportunity");

@@ -13,8 +13,8 @@ public class Rover {
 	public void dropRover(Plateau plateau, String args) {		
 		String[] parts = args.split(" ");
 		
-		int x = Character.getNumericValue(parts[0].toCharArray()[0]);
-		int y = Character.getNumericValue(parts[1].toCharArray()[0]);
+		int x = Integer.parseInt(parts[0]);// Character.getNumericValue(parts[0].toCharArray()[0]);
+		int y = Integer.parseInt(parts[1]);// Character.getNumericValue(parts[1].toCharArray()[0]);
 		Heading h = ToHeading(parts[2].toCharArray()[0]);
 		
 		dropRover(plateau, new Position(x, y), h);
