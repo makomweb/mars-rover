@@ -31,6 +31,8 @@ public class Program {
 			r.processInstructions(instructionsCollection);
 			System.out.println("Report: " + r.reportStatus());
 		}
+		
+		//scanner.close();
 	}
 	
 	private static Rover dropRover(String roverId, Plateau p, String dropInfo) {		

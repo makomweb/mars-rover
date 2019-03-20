@@ -23,6 +23,7 @@ public class RoverRideTests {
 	private static Instruction[] convertToArray(String instructions) {
 		return new Instructions(instructions).getInstructions();
 	}
+	
 	@Test
 	public void moving_rover_two_should_succeed() {
 		Rover rover = new Rover("Opportunity");
