@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class Rover {
 	
@@ -59,19 +60,15 @@ public class Rover {
 		return position.toString() + " " + FromHeading(heading);
 	}
 	
-	public void processInstructions(String instructions) {		
-		for (char c: instructions.toCharArray()) {
-			switch (c) {
-				case 'L': processInstruction(Instruction.LEFT); break;
-				case 'M': processInstruction(Instruction.MOVE); break;
-				case 'R': processInstruction(Instruction.RIGHT); break;
-				default: throw new UnknownInstructionException(c);
-			}
-		}
-	}
 	
 	public boolean hasPosition(Position pos) {		
 		return position.isEqual(pos);
+	}
+	
+	public void processInstructions(Instruction[] instructions) {
+		for (Instruction i : instructions) {
+			processInstruction(i);
+		}
 	}
 	
 	private void processInstruction(Instruction instruction) {

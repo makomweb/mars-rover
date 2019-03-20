@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -26,7 +27,8 @@ public class Program {
 			System.out.print("Enter instructions for " + name + " (in the form LMRMMMLMM):");
 			String instructions = scanner.nextLine();
 
-			r.processInstructions(instructions);
+			Instruction[] instructionsCollection = new Instructions(instructions).getInstructions();
+			r.processInstructions(instructionsCollection);
 			System.out.println("Report: " + r.reportStatus());
 		}
 	}
