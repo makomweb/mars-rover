@@ -8,7 +8,6 @@ public class Plateau {
 	private List<Rover> rovers = new ArrayList<Rover>();
 	
 	public Plateau(int dimX, int dimY) {
-		
 		this.dimX = dimX;
 		this.dimY = dimY;
 	}

@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Rover {
 	
 	private Plateau plateau;
@@ -13,42 +11,36 @@ public class Rover {
 	
 	public void dropRover(Plateau plateau, String args) {		
 		String[] parts = args.split(" ");
-		
 		int x = Integer.parseInt(parts[0]);// Character.getNumericValue(parts[0].toCharArray()[0]);
 		int y = Integer.parseInt(parts[1]);// Character.getNumericValue(parts[1].toCharArray()[0]);
-		Heading h = ToHeading(parts[2].toCharArray()[0]);
-		
-		dropRover(plateau, new Position(x, y), h);
+		Heading heading = ToHeading(parts[2].toCharArray()[0]);
+		dropRover(plateau, new Position(x, y), heading);
 	}
 
-	public void dropRover(Plateau plateau, Position p, Heading h) {
-		if (!p.IsOnPlateau(plateau)) {
-			throw new PositionNotOnPlateauException(plateau, p);
+	public void dropRover(Plateau plateau, Position position, Heading heading) {
+		if (!position.IsOnPlateau(plateau)) {
+			throw new PositionNotOnPlateauException(plateau, position);
 		}
 		
-		if (plateau.isOccupied(p)) {
+		if (plateau.isOccupied(position)) {
 			throw new RuntimeException("Already occupied by a rover!");
 		}
 		
 		this.plateau = plateau;
-		position = p;
-		heading = h;
+		this.position = position;
+		this.heading = heading;
 		
 		plateau.addRover(this);
 	}
 	
-	public void dropRover(Plateau plateau, int posX, int posY, char heading) {		
-		Heading h = ToHeading(heading);
-				
-		dropRover(plateau, new Position(posX, posY), h);
+	public void dropRover(Plateau plateau, int posX, int posY, char heading) {
+		dropRover(plateau, new Position(posX, posY), ToHeading(heading));
 	}
 
 	public String reportStatus() {		
 		StringBuilder sb = new StringBuilder(name);
-		
 		sb.append(" ");
 		sb.append(reportPosition());
-			
 		return sb.toString();
 	}
 
@@ -56,12 +48,10 @@ public class Rover {
 		if (position == null || heading == null) {
 			return "Not dropped yet.";
 		}
-		
 		return position.toString() + " " + FromHeading(heading);
 	}
-	
-	
-	public boolean hasPosition(Position pos) {		
+
+	public boolean hasPosition(Position pos) {
 		return position.isEqual(pos);
 	}
 	
@@ -80,6 +70,7 @@ public class Rover {
 			case LEFT: turnLeft(); break;
 			case MOVE: moveForward(); break;
 			case RIGHT: turnRight(); break;
+			default: throw new RuntimeException("Should not get here!");
 		}
 	}
 	
@@ -89,6 +80,7 @@ public class Rover {
 			case NORTH: heading = Heading.WEST; break;
 			case SOUTH: heading = Heading.EAST; break;
 			case WEST: heading = Heading.SOUTH; break;
+			default: throw new RuntimeException("Should not get here!");
 		}
 	}
 	
@@ -98,16 +90,15 @@ public class Rover {
 			case NORTH: heading = Heading.EAST; break;
 			case SOUTH: heading = Heading.WEST; break;
 			case WEST: heading = Heading.NORTH; break;
+			default: throw new RuntimeException("Should not get here!");
 		}
 	}
 	
 	private void moveForward() {		
 		Position newPosition = position.moveForward(heading);
-		
 		if (!newPosition.IsOnPlateau(plateau)) {
 			throw new PositionNotOnPlateauException(plateau, newPosition);
 		}
-		
 		position = newPosition;
 	}
 	
@@ -127,7 +118,7 @@ public class Rover {
 			case WEST: return 'W';
 			case SOUTH: return 'S';
 			case EAST: return 'E';
-			default: return ' ';
+			default: throw new RuntimeException("Unsupported heading '" + heading + "'!");
 		}
 	}
 }

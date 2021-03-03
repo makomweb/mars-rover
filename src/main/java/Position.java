@@ -36,15 +36,12 @@ public class Position {
 	}
 	
 	public Position moveForward(Heading heading) {
-		Position newPosition = null;
-		
 		switch (heading) {
-			case EAST: newPosition = new Position(x + 1, y); break;
-			case NORTH: newPosition = new Position(x, y + 1); break;
-			case SOUTH: newPosition = new Position(x, y - 1); break;
-			case WEST: newPosition = new Position(x - 1, y); break;
+			case EAST: return new Position(x + 1, y);
+			case NORTH: return new Position(x, y + 1);
+			case SOUTH: return new Position(x, y - 1);
+			case WEST: return new Position(x - 1, y);
+			default: throw new RuntimeException("Should not get here!");
 		}
-
-		return newPosition;
 	}
 }
