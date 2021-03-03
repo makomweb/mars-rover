@@ -127,7 +127,7 @@ public class RoverRideTests {
 	}
 	
 	@Test
-	public void dropping_two_rovers_next_to_eachother_should_succeed() {
+	public void dropping_two_rovers_next_to_another_should_succeed() {
 		Rover one = new Rover("Curiosity");
 		Rover two = new Rover("Opportunity");
 		
